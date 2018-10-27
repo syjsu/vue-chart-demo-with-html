@@ -1,0 +1,56 @@
+<html>
+
+<head>
+    <script src="vue.js" type="text/javascript"></script>
+    <script src="vue-chartjs.full.min.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <div class="app">
+        Hello World 
+        <line-chart></line-chart>
+        1+1={{1+1}}
+    </div>
+    <script type="text/javascript">
+
+    Vue.component('line-chart', {
+        extends: VueChartJs.Line,
+        mounted() {
+            this.renderChart({
+                labels: ['一月', '二月', '三月', '四月', '五月', '六月', '七月'],
+                datasets: [{
+                    label: '相关数据',
+                    backgroundColor: '#f87979',
+                    data: [40, 39, 10, 40, 39, 80, 40]
+                }]
+            }, { responsive: true, maintainAspectRatio: false })
+        }
+
+    })
+
+    var app = new Vue({
+        el: '.app',
+        data: () => ({
+            chart_options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        }),
+        methods: {
+            onReady(instance, ECharts) {
+                console.log(instance, ECharts);
+            },
+            onClick(event, instance, ECharts) {
+                console.log(arguments);
+            }
+        }
+    })
+    </script>
+</body>
+
+</html>
